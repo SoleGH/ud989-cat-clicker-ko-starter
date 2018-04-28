@@ -1,19 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Cat Clicker</title>
 </head>
-<body>
-    <ul id="cat-list"></ul>
-    <div id="cat">
 
-        <h2 id="cat-name"></h2>
-        <div id="cat-count"></div>
-        <img id="cat-img" src="" alt="cute cat">
+<body>
+    <div data-bind="foreach:cats">
+        <button data-bind="text:catname,click:$parent.changeCat"></button>
+    </div>
+    <div data-bind="with:currentCat">
+        <h2 data-bind="text:catname"></h2>
+        <div data-bind="text:catLevel"></div>
+        <div data-bind="text:clickCount"></div>
+        <img src="" alt="cute cat" data-bind="click:$parent.clickCat,attr:{src:imgSrc}">
+        <ul data-bind="foreach:nickNames">
+            <li>
+                <span data-bind="text:$data"></span>
+            </li>
+        </ul>
 
     </div>
     <script src="js/lib/knockout-3.2.0.js"></script>
     <script src="js/app.js"></script>
 </body>
+
 </html>
