@@ -1,3 +1,4 @@
+// 定义猫属性集合
 initCats = [{
         catNO: 0,
         catname: "Tony",
@@ -13,7 +14,7 @@ initCats = [{
         nickNames: ['mm', 'kk', 'jj'],
     },
 ];
-
+// 定义猫属性类
 var cat = function (data) {
     var self = this;
     self.catNO = ko.observable(data.catNO);
@@ -31,22 +32,22 @@ var cat = function (data) {
     }, self);
 }
 
+// 定义view module 
 var viewModule = function () {
     var self = this;
-    // self.currentCat = ko.observable();    
     self.cats = ko.observableArray([]);
     initCats.forEach(catArg => {
         self.cats.push(new cat(catArg));
     });
-    console.log(self.cats()[0].catname());
-
     self.currentCat = ko.observable(self.cats()[0]);
+    // 更改当前展示的cat
     self.changeCat = function (clickCat) {
         self.currentCat(clickCat);
     }
+    // 点击事件
     self.clickCat = function () {
         self.currentCat().clickCount(self.currentCat().clickCount() + 1);
     }
 }
-
+// 绑定view module
 ko.applyBindings(new viewModule());
